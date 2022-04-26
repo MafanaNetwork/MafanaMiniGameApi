@@ -1,7 +1,6 @@
 package me.TahaCheji.command;
 
 import me.TahaCheji.Main;
-import me.TahaCheji.game.Test;
 import me.TahaCheji.gameData.Game;
 import me.TahaCheji.gameData.GameMode;
 import me.TahaCheji.gameData.GamePlayer;
