@@ -1,0 +1,10 @@
+name: MafanaMiniGameApi
+version: '${project.version}'
+main: me.TahaCheji.Main
+api-version: 1.18
+authors: [ TahaCheji ]
+description: Mini game api for mafana network games
+
+commands:
+  game:
+  gameAdmin:
