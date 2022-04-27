@@ -13,8 +13,8 @@
 
     <description>Mini game api for mafana network games</description>
     <properties>
-        <java.version>16</java.version>
-        <project.build.sourceEncoding>UTF-16</project.build.sourceEncoding>
+        <java.version>8</java.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
     <build>
