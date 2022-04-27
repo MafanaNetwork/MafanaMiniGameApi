@@ -11,7 +11,7 @@
 
     <name>MafanaMiniGameApi</name>
 
-    <description>Mini game api for mafana network games</description>
+    <description>Mini game-api for mafana network games</description>
     <properties>
         <java.version>8</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
