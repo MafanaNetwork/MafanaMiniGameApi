@@ -2,6 +2,7 @@ package me.TahaCheji.command;
 
 import me.TahaCheji.Main;
 import me.TahaCheji.gameData.Game;
+import me.TahaCheji.gameData.GameGui;
 import me.TahaCheji.gameData.GamePlayer;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -17,7 +18,7 @@ public class MainCommand implements CommandExecutor {
         if(label.equalsIgnoreCase("game")) {
             if (args[0].equalsIgnoreCase("join")) {
                 if (args.length == 1) {
-                    //new GameGui().getGameGui().open(player);
+                    new GameGui().getGameGui().open(player);
                     return true;
                 }
                 Game game = Main.getInstance().getGame(args[1]);
