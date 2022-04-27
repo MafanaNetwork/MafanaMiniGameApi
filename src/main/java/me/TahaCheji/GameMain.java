@@ -2,7 +2,7 @@ package me.TahaCheji;
 
 import me.TahaCheji.command.AdminCommands;
 import me.TahaCheji.command.MainCommand;
-import me.TahaCheji.countdown.CountDownEvent;
+import me.TahaCheji.game.Duels;
 import me.TahaCheji.gameData.Game;
 import me.TahaCheji.gameData.GameData;
 import me.TahaCheji.gameData.GamePlayer;
@@ -34,12 +34,10 @@ public final class GameMain extends JavaPlugin {
     private HashMap<Player, Game> playerCreateGameHashMap = new HashMap<>();
     public ArrayList<Team> Teams = new ArrayList<Team>();
     private static HashMap<Player, GameMap> playerGameHashMap = new HashMap<>();
-    public CountDownEvent countDownEvent;
 
     @Override
     public void onEnable() {
         instance = this;
-        countDownEvent = new CountDownEvent();
         File dataFolder = getServer().getWorldContainer();
         File[] files = dataFolder.listFiles();
         assert files != null;
@@ -64,6 +62,7 @@ public final class GameMain extends JavaPlugin {
         }
         getCommand("game").setExecutor(new MainCommand());
         getCommand("gameAdmin").setExecutor(new AdminCommands());
+        addGame(new Duels());
     }
 
     @Override
@@ -158,10 +157,6 @@ public final class GameMain extends JavaPlugin {
 
     public ArrayList<Team> getTeams() {
         return Teams;
-    }
-
-    public CountDownEvent getCountDownEvent() {
-        return countDownEvent;
     }
 
     public HashMap<Player, Game> getPlayerCreateGameHashMap() {

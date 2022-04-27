@@ -4,6 +4,7 @@ package me.TahaCheji.gameData;
 import me.TahaCheji.GameMain;
 import me.TahaCheji.lobbyData.Lobby;
 import me.TahaCheji.mapUtil.GameMap;
+import me.TahaCheji.tasks.GameCountdownTask;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -29,10 +30,12 @@ public class Game implements GameManager {
 
     private GameState gameState = GameState.LOBBY;
     private boolean movementFrozen = false;
-    private int gameTime = 0;
+    private int maxGameTime = 0;
+    private int gameTime = maxGameTime;
 
     private List<GamePlayer> activePlayers = new ArrayList<>();
     private Map<GamePlayer, Location> gamePlayerToSpawnPoint = new HashMap<>();
+    public GameCountdownTask gameCountdownTask = null;
 
     private boolean canJoin = true;
     private Set<GamePlayer> spectators = new HashSet<>();
@@ -84,7 +87,6 @@ public class Game implements GameManager {
         gamePlayer.getPlayer().setHealth(gamePlayer.getPlayer().getMaxHealth());
         gamePlayer.teleport(lobbySpawn);
         GameMain.getInstance().setGame(gamePlayer.getPlayer(), this);
-        //inGameLobbyScoreBoard.setGameScoreboard(gamePlayer);
         setState(GameState.LOBBY);
         if (activePlayers.size() == 2) {
             sendMessage(ChatColor.GOLD + "[Game Manager] " + "The game will begin in 20 seconds...");
@@ -119,6 +121,10 @@ public class Game implements GameManager {
 
     @Override
     public void end() {
+        if (gameCountdownTask != null) {
+            gameCountdownTask.getGameRunTask().getGameTask().setGameTimer(getGameTime());
+            gameCountdownTask.getGameRunTask().getGameTask().cancel();
+        }
         for (GamePlayer gamePlayer : getGamePlayers()) {
             gamePlayer.setKills(0);
             Player player = gamePlayer.getPlayer();
@@ -164,7 +170,7 @@ public class Game implements GameManager {
     @Override
     public void resetGameInfo() {
         getPlayers().clear();
-        gameTime = 0;
+        gameTime = maxGameTime;
         map.unload();
         canJoin = true;
     }
@@ -204,7 +210,8 @@ public class Game implements GameManager {
 
     @Override
     public void startCountDown() {
-
+        gameCountdownTask = new GameCountdownTask(this);
+        gameCountdownTask.runTaskTimer(GameMain.getInstance(), 0, 20);
     }
 
     public List<GamePlayer> getPlayers() {
@@ -227,6 +234,10 @@ public class Game implements GameManager {
         for (GamePlayer gamePlayer : getPlayers()) {
             gamePlayer.sendMessage(message);
         }
+    }
+
+    public int getMaxGameTime() {
+        return maxGameTime;
     }
 
     public void setPlayerSpawnLocations(List<Location> playerSpawnLocations) {
@@ -302,6 +313,10 @@ public class Game implements GameManager {
 
     public void setGameTime(int gameTime) {
         this.gameTime = gameTime;
+    }
+
+    public void setMaxGameTime(int maxGameTime) {
+        this.maxGameTime = maxGameTime;
     }
 
     public void setActivePlayers(List<GamePlayer> activePlayers) {
