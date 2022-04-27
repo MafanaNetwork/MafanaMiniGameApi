@@ -4,7 +4,7 @@ import dev.triumphteam.gui.builder.item.ItemBuilder;
 import dev.triumphteam.gui.guis.Gui;
 import dev.triumphteam.gui.guis.GuiItem;
 import dev.triumphteam.gui.guis.PaginatedGui;
-import me.TahaCheji.Main;
+import me.TahaCheji.GameMain;
 import net.kyori.adventure.text.Component;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -23,7 +23,7 @@ public class GameGui implements Listener {
 
     public PaginatedGui getGameGui() {
         PaginatedGui gui = Gui.paginated()
-                .title(Component.text(ChatColor.GOLD + "SkyWiz [4s]"))
+                .title(Component.text(ChatColor.GOLD + "Game Menu"))
                 .rows(6)
                 .pageSize(54)
                 .disableAllInteractions()
@@ -65,7 +65,7 @@ public class GameGui implements Listener {
         gui.setItem(6, 3, ItemBuilder.from(Material.PAPER).setName(ChatColor.DARK_GRAY + "Previous").asGuiItem(event -> gui.previous()));
         gui.setItem(6, 7, ItemBuilder.from(Material.PAPER).setName(ChatColor.DARK_GRAY + "Next").asGuiItem(event -> gui.next()));
 
-        for(Game game : Main.getInstance().getGames()) {
+        for(Game game : GameMain.getInstance().getGames()) {
             ItemStack itemStack = game.getGameIcon();
             ItemMeta itemMeta = itemStack.getItemMeta();
             itemMeta.setDisplayName(game.getName());
@@ -86,7 +86,7 @@ public class GameGui implements Listener {
 
     @EventHandler
     public void onClick(InventoryClickEvent event) {
-        if(!event.getView().getTitle().contains("SkyWiz [4s]")) {
+        if(!event.getView().getTitle().contains("Game Menu")) {
             return;
         }
         event.setCancelled(true);
@@ -100,8 +100,8 @@ public class GameGui implements Listener {
             return;
         }
         Player player = (Player) event.getWhoClicked();
-        GamePlayer gamePlayer = Main.getInstance().getPlayer(player);
-        Game game = Main.getInstance().getGame(event.getCurrentItem().getItemMeta().getDisplayName());
+        GamePlayer gamePlayer = GameMain.getInstance().getPlayer(player);
+        Game game = GameMain.getInstance().getGame(event.getCurrentItem().getItemMeta().getDisplayName());
         if(game == null) {
             player.sendMessage("Game no exisit");
             return;

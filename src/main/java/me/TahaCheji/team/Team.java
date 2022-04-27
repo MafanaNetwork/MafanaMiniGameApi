@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.UUID;
 
 import me.TahaCheji.Log.Log;
-import me.TahaCheji.Main;
+import me.TahaCheji.GameMain;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
@@ -29,7 +29,7 @@ public class Team {
 
 	public Team(String teamname) {
 		this.teamname = teamname;
-		Main.getInstance().getTeams().add(this);
+		GameMain.getInstance().getTeams().add(this);
 	}
 
 	public boolean containsPlayer(Player player) {
@@ -41,7 +41,7 @@ public class Team {
 
 	public static String joinRandomTeam(Player player) {
 		Team teamLowest = null;
-		for (Team team : Main.getInstance().getTeams()) {
+		for (Team team : GameMain.getInstance().getTeams()) {
 			if (teamLowest == null || team.getCurrentSize() < teamLowest.getCurrentSize()) {
 				teamLowest = team;
 			}

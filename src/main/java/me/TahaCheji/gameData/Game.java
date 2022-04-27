@@ -1,15 +1,13 @@
 package me.TahaCheji.gameData;
 
 
-import me.TahaCheji.Main;
-import me.TahaCheji.countdown.Countdown;
+import me.TahaCheji.GameMain;
 import me.TahaCheji.lobbyData.Lobby;
 import me.TahaCheji.mapUtil.GameMap;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.World;
-import org.bukkit.block.Chest;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffectType;
@@ -72,7 +70,7 @@ public class Game implements GameManager {
             }
             lobbySpawn.setWorld(world);
         }
-        if (Main.getInstance().isInGame(gamePlayer.getPlayer())) {
+        if (GameMain.getInstance().isInGame(gamePlayer.getPlayer())) {
             gamePlayer.sendMessage(ChatColor.RED + "[Game Manager] " + "You are already in a game");
             return;
         }
@@ -85,12 +83,12 @@ public class Game implements GameManager {
         gamePlayer.getPlayer().setGameMode(org.bukkit.GameMode.ADVENTURE);
         gamePlayer.getPlayer().setHealth(gamePlayer.getPlayer().getMaxHealth());
         gamePlayer.teleport(lobbySpawn);
-        Main.getInstance().setGame(gamePlayer.getPlayer(), this);
+        GameMain.getInstance().setGame(gamePlayer.getPlayer(), this);
         //inGameLobbyScoreBoard.setGameScoreboard(gamePlayer);
         setState(GameState.LOBBY);
         if (activePlayers.size() == 2) {
             sendMessage(ChatColor.GOLD + "[Game Manager] " + "The game will begin in 20 seconds...");
-            Main.getInstance().addActiveGame(this);
+            GameMain.getInstance().addActiveGame(this);
             start();
             startCountDown();
         }
@@ -114,7 +112,7 @@ public class Game implements GameManager {
     public void adminStart() {
         setState(GameState.STARTING);
         sendMessage(ChatColor.GOLD + "[Game Manager] " + "The game will begin in 20 seconds...");
-        Main.getInstance().getActiveGames().add(this);
+        GameMain.getInstance().getActiveGames().add(this);
         start();
         startCountDown();
     }
@@ -124,7 +122,7 @@ public class Game implements GameManager {
         for (GamePlayer gamePlayer : getGamePlayers()) {
             gamePlayer.setKills(0);
             Player player = gamePlayer.getPlayer();
-            Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getInstance(), new Runnable() {
+            Bukkit.getScheduler().scheduleSyncDelayedTask(GameMain.getInstance(), new Runnable() {
                 @Override
                 public void run() {
                     gamePlayer.teleport(new Lobby().getLobbyPoint());
@@ -135,13 +133,13 @@ public class Game implements GameManager {
             player.getInventory().setArmorContents(null);
             player.setHealth(20);
             gamePlayer.setPlayerLocation(PlayerLocation.LOBBY);
-            Main.getInstance().playerGameMap.remove(player.getPlayer(), this);
+            GameMain.getInstance().playerGameMap.remove(player.getPlayer(), this);
             player.removePotionEffect(PotionEffectType.SPEED);
         }
-        Main.getInstance().getGames().remove(this);
+        GameMain.getInstance().getGames().remove(this);
         resetGameInfo();
-        Main.getInstance().getGames().add(this);
-        Main.getInstance().removeActiveGame(this);
+        GameMain.getInstance().getGames().add(this);
+        GameMain.getInstance().removeActiveGame(this);
     }
 
     @Override
@@ -152,7 +150,7 @@ public class Game implements GameManager {
     @Override
     public void playerLeave(GamePlayer gamePlayer) {
         Player player = gamePlayer.getPlayer();
-        if (!Main.getInstance().isInGame(player)) {
+        if (!GameMain.getInstance().isInGame(player)) {
             return;
         }
         if (isState(GameState.ACTIVE)) {

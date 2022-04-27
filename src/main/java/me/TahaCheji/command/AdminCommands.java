@@ -1,9 +1,8 @@
 package me.TahaCheji.command;
 
-import me.TahaCheji.Main;
+import me.TahaCheji.GameMain;
 import me.TahaCheji.gameData.Game;
 import me.TahaCheji.gameData.GameMode;
-import me.TahaCheji.gameData.GamePlayer;
 import me.TahaCheji.gameData.PlayerLocation;
 import me.TahaCheji.mapUtil.GameMap;
 import me.TahaCheji.mapUtil.LocalGameMap;
@@ -38,17 +37,17 @@ public class AdminCommands implements CommandExecutor {
                 File gameMapsFolder = new File("plugins/SkyWiz/", "maps");
                 GameMap gameMap = new LocalGameMap(gameMapsFolder, args[1], false);
                 if(args.length == 3 && args[2].equalsIgnoreCase("save")) {
-                    GameMap newGameMap = Main.getInstance().getPlayerGameHashMap().get(player);
-                    player.teleport(Main.getInstance().getLobbyPoint());
+                    GameMap newGameMap = GameMain.getInstance().getPlayerGameHashMap().get(player);
+                    player.teleport(GameMain.getInstance().getLobbyPoint());
                     newGameMap.saveMap();
-                    Main.getInstance().removeMap(player, newGameMap);
+                    GameMain.getInstance().removeMap(player, newGameMap);
                     return true;
                 }
                 gameMap.load();
                 player.teleport(gameMap.getWorld().getSpawnLocation());
-                Main.getInstance().getPlayer(player).setPlayerLocation(PlayerLocation.GAME);
+                GameMain.getInstance().getPlayer(player).setPlayerLocation(PlayerLocation.GAME);
                 player.setGameMode(org.bukkit.GameMode.CREATIVE);
-                Main.getInstance().addMap(player, gameMap);
+                GameMain.getInstance().addMap(player, gameMap);
             }
             if (args[0].equalsIgnoreCase("create")) {
                 if (args[1].equalsIgnoreCase("game")) {
@@ -70,7 +69,7 @@ public class AdminCommands implements CommandExecutor {
                         gameIcon = player.getItemInHand();
                     }
                     gameMode = GameMode.NORMAL;
-                    File gameMapsFolder = new File(Main.getInstance().getDataFolder(), "maps");
+                    File gameMapsFolder = new File(GameMain.getInstance().getDataFolder(), "maps");
                     gameMap = new LocalGameMap(gameMapsFolder, args[4], false);
                     player.sendMessage(ChatColor.GOLD + "[GameBuilder]: " + "Great now all you need to do is save your game then add the spawn points! [You can do that in the yml game file]");
                     maxPlayers = Integer.parseInt(args[5]);

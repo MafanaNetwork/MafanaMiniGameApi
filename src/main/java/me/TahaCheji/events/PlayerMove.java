@@ -1,6 +1,6 @@
 package me.TahaCheji.events;
 
-import me.TahaCheji.Main;
+import me.TahaCheji.GameMain;
 import me.TahaCheji.gameData.Game;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -13,7 +13,7 @@ public class PlayerMove implements Listener {
     public void onMove(PlayerMoveEvent event) {
         Player player = event.getPlayer();
 
-        Game game = Main.getInstance().getGame(player);
+        Game game = GameMain.getInstance().getGame(player);
         if (game != null) {
             if (game.isMovementFrozen()) {
                     if (event.getFrom().getBlockX() != event.getTo().getBlockX() || event.getFrom().getBlockZ() != event.getTo().getBlockZ()) {

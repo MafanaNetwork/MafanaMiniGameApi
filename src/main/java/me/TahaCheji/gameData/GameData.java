@@ -1,6 +1,6 @@
 package me.TahaCheji.gameData;
 
-import me.TahaCheji.Main;
+import me.TahaCheji.GameMain;
 import me.TahaCheji.mapUtil.GameMap;
 import me.TahaCheji.mapUtil.LocalGameMap;
 import org.bukkit.Bukkit;
@@ -77,7 +77,7 @@ public class GameData {
     }
 
     public static void removeGame(String gameName) {
-        File dataFolder = new File(Main.getInstance().getDataFolder(), "games");
+        File dataFolder = new File(GameMain.getInstance().getDataFolder(), "games");
         File[] files = dataFolder.listFiles();
         for (File file : files) {
             if (file.getName().contains(gameName)) {

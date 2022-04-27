@@ -1,6 +1,6 @@
 package me.TahaCheji.events;
 
-import me.TahaCheji.Main;
+import me.TahaCheji.GameMain;
 import me.TahaCheji.gameData.GamePlayer;
 import me.TahaCheji.gameData.PlayerLocation;
 import org.bukkit.GameMode;
@@ -14,14 +14,14 @@ public class PlayerJoin implements Listener {
     @EventHandler
     public void playerJoin(PlayerJoinEvent e) {
         GamePlayer gamePlayer = new GamePlayer(e.getPlayer(), PlayerLocation.LOBBY);
-        if(!Main.getInstance().getPlayers().contains(gamePlayer)) {
-            Main.getInstance().addGamePlayer(gamePlayer);
+        if(!GameMain.getInstance().getPlayers().contains(gamePlayer)) {
+            GameMain.getInstance().addGamePlayer(gamePlayer);
         }
         gamePlayer.getPlayer().setHealth(20);
         gamePlayer.getPlayer().setFoodLevel(20);
         gamePlayer.getPlayer().getInventory().clear();
         gamePlayer.getPlayer().getInventory().setArmorContents(null);
-        e.getPlayer().teleport(Main.getInstance().getLobbyPoint());
+        e.getPlayer().teleport(GameMain.getInstance().getLobbyPoint());
         e.setJoinMessage(null);
         e.getPlayer().setGameMode(GameMode.SURVIVAL);
         //LobbyScoreBoard lobbyScoreBoard = new LobbyScoreBoard();

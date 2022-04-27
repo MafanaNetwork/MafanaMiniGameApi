@@ -1,6 +1,6 @@
 package me.TahaCheji.events;
 
-import me.TahaCheji.Main;
+import me.TahaCheji.GameMain;
 import me.TahaCheji.gameData.Game;
 import me.TahaCheji.gameData.GamePlayer;
 import me.TahaCheji.gameData.PlayerLocation;
@@ -19,11 +19,11 @@ public class PlayerDeath implements Listener {
     @EventHandler
     public void onDeath (PlayerDeathEvent e) {
         Player player = e.getEntity();
-        Game game = Main.getInstance().getGame(player);
+        Game game = GameMain.getInstance().getGame(player);
         if (game != null && game.getGamePlayer(player) != null) {
             GamePlayer gamePlayer = game.getGamePlayer(player);
             if (gamePlayer.getPlayer().getUniqueId().toString().contains(player.getUniqueId().toString())) {
-                new DeathManager(Main.getInstance().getPlayer(e.getPlayer().getKiller()), gamePlayer, game).handle();
+                new DeathManager(GameMain.getInstance().getPlayer(e.getPlayer().getKiller()), gamePlayer, game).handle();
                 e.setCancelled(true);
             }
         }
@@ -32,7 +32,7 @@ public class PlayerDeath implements Listener {
     @EventHandler
     public void onMoveDeathInGame(PlayerMoveEvent event) throws IOException {
         Player player = event.getPlayer();
-        Game game = Main.getInstance().getGame(player);
+        Game game = GameMain.getInstance().getGame(player);
         if (game != null && game.getGamePlayer(player) != null) {
             GamePlayer gamePlayer = game.getGamePlayer(player);
             if (!(gamePlayer.getPlayerLocation() == PlayerLocation.GAME)) {

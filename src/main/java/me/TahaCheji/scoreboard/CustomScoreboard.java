@@ -1,12 +1,10 @@
 package me.TahaCheji.scoreboard;
 
-import me.TahaCheji.Main;
-import me.TahaCheji.gameData.Game;
+import me.TahaCheji.GameMain;
 import me.TahaCheji.gameData.GamePlayer;
 import me.TahaCheji.team.Team;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.Color;
 import org.bukkit.entity.Player;
 import org.bukkit.scoreboard.DisplaySlot;
 import org.bukkit.scoreboard.Objective;
@@ -44,7 +42,7 @@ public class CustomScoreboard {
 	}
 
 	public void updateScoreBoard(GamePlayer player) {
-		TaskId = Bukkit.getScheduler().scheduleSyncRepeatingTask(Main.getInstance(), new Runnable() {
+		TaskId = Bukkit.getScheduler().scheduleSyncRepeatingTask(GameMain.getInstance(), new Runnable() {
 			@Override
 			public void run() {
 					if(!player.getPlayer().isOnline()) {

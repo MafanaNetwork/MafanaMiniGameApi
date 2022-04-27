@@ -1,16 +1,12 @@
 package me.TahaCheji.countdown;
 
-import me.TahaCheji.Main;
+import me.TahaCheji.GameMain;
 import me.TahaCheji.gameData.Game;
-import me.TahaCheji.scoreboard.ScoreboardTeams;
 import me.TahaCheji.utils.Title;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 import net.md_5.bungee.api.ChatColor;
-import org.bukkit.scoreboard.Scoreboard;
-
-import java.lang.reflect.Method;
 
 public class Countdown {
 
@@ -27,7 +23,7 @@ public class Countdown {
 	}
 	public void start(final String message, Player player, GameState gameState, Game game) {
 
-			Scheduler = Bukkit.getScheduler().scheduleSyncRepeatingTask(Main.getInstance(), new Runnable() {
+			Scheduler = Bukkit.getScheduler().scheduleSyncRepeatingTask(GameMain.getInstance(), new Runnable() {
 			int curentCount = Startvalue;
 			@Override
 			public void run() {

@@ -1,6 +1,6 @@
 package me.TahaCheji.utils;
 
-import me.TahaCheji.Main;
+import me.TahaCheji.GameMain;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -24,7 +24,7 @@ public class Files {
 		}
 		
 		if(!configFile.exists()) {
-			Main.getInstance().saveDefaultConfig();
+			GameMain.getInstance().saveDefaultConfig();
 		}
 		String version = Bukkit.getServer().getClass().getPackage().getName().split("\\.")[3];
 

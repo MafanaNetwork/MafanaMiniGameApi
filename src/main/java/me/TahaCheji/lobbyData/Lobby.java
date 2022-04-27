@@ -1,6 +1,6 @@
 package me.TahaCheji.lobbyData;
 
-import me.TahaCheji.Main;
+import me.TahaCheji.GameMain;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 
@@ -15,12 +15,12 @@ public class Lobby {
             String world = "world";
 
             try {
-                x = Main.getInstance().getConfig().getInt("lobby-point.x");
-                y = Main.getInstance().getConfig().getInt("lobby-point.y");
-                z = Main.getInstance().getConfig().getInt("lobby-point.z");
-                world = Main.getInstance().getConfig().getString("lobby-point.world");
+                x = GameMain.getInstance().getConfig().getInt("lobby-point.x");
+                y = GameMain.getInstance().getConfig().getInt("lobby-point.y");
+                z = GameMain.getInstance().getConfig().getInt("lobby-point.z");
+                world = GameMain.getInstance().getConfig().getString("lobby-point.world");
             } catch (Exception ex) {
-                Main.getInstance().getLogger().severe("Lobby point failed with exception: " + ex);
+                GameMain.getInstance().getLogger().severe("Lobby point failed with exception: " + ex);
                 ex.printStackTrace();
             }
 

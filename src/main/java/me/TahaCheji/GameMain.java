@@ -1,6 +1,7 @@
 package me.TahaCheji;
 
 import me.TahaCheji.command.AdminCommands;
+import me.TahaCheji.command.MainCommand;
 import me.TahaCheji.countdown.CountDownEvent;
 import me.TahaCheji.gameData.Game;
 import me.TahaCheji.gameData.GameData;
@@ -22,9 +23,9 @@ import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 
-public final class Main extends JavaPlugin {
+public final class GameMain extends JavaPlugin {
 
-    public static Main instance;
+    public static GameMain instance;
     public List<GameMap> activeMaps = new ArrayList<>();
     private Set<Game> games = new HashSet<>();
     private Set<Game> activeGames = new HashSet<>();
@@ -61,7 +62,7 @@ public final class Main extends JavaPlugin {
         } catch (IOException | InvalidConfigurationException e2) {
             e2.printStackTrace();
         }
-        getCommand("game").setExecutor(new AdminCommands());
+        getCommand("game").setExecutor(new MainCommand());
         getCommand("gameAdmin").setExecutor(new AdminCommands());
     }
 
@@ -151,7 +152,7 @@ public final class Main extends JavaPlugin {
         return gPlayer;
     }
 
-    public static Main getInstance() {
+    public static GameMain getInstance() {
         return instance;
     }
 

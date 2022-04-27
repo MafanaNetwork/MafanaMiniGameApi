@@ -1,6 +1,6 @@
 package me.TahaCheji.team;
 
-import me.TahaCheji.Main;
+import me.TahaCheji.GameMain;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -17,7 +17,7 @@ public class TeamListener implements Listener{
 		if(e.getEntity() instanceof Player && e.getDamager() instanceof Player) {
 			Player geter = (Player) e.getEntity();
 			Player seter = (Player) e.getDamager();
-			for (Team team : Main.getInstance().getTeams()) {
+			for (Team team : GameMain.getInstance().getTeams()) {
 				if(team.containsPlayer(geter) && team.containsPlayer(seter)) {
 					if(!team.getFriendlyFire()) {
 						e.setCancelled(true);
@@ -31,7 +31,7 @@ public class TeamListener implements Listener{
 	@EventHandler
 	private void allowInteractBlock(PlayerInteractEvent e) {
 		Player player = e.getPlayer();
-		for (Team team : Main.getInstance().getTeams()) {
+		for (Team team : GameMain.getInstance().getTeams()) {
 			if(team.containsPlayer(player)) {
 				if(!team.getCanInteract()) {
 					e.setCancelled(true);
@@ -43,7 +43,7 @@ public class TeamListener implements Listener{
 	@EventHandler
 	private void allowInteractEntity(PlayerInteractAtEntityEvent e) {
 		Player player = e.getPlayer();
-		for (Team team : Main.getInstance().getTeams()) {
+		for (Team team : GameMain.getInstance().getTeams()) {
 			if(team.containsPlayer(player)) {
 				if(!team.getCanInteract()) {
 					e.setCancelled(true);
@@ -56,7 +56,7 @@ public class TeamListener implements Listener{
 	private void allowDamage(EntityDamageByEntityEvent e) {
 		if(e.getDamager() instanceof Player) {
 			Player player = (Player) e.getDamager();
-			for (Team team : Main.getInstance().getTeams()) {
+			for (Team team : GameMain.getInstance().getTeams()) {
 				if(team.containsPlayer(player)) {
 					if(!team.getCanInteract()) {
 						e.setCancelled(true);
@@ -69,7 +69,7 @@ public class TeamListener implements Listener{
 	@EventHandler
 	private void canBreak(BlockBreakEvent e) {
 		Player player = e.getPlayer();
-		for (Team team : Main.getInstance().getTeams()) {
+		for (Team team : GameMain.getInstance().getTeams()) {
 			if(team.containsPlayer(player)) {
 				if(!team.getCanBreak()) {
 					e.setCancelled(true);
@@ -81,7 +81,7 @@ public class TeamListener implements Listener{
 	@EventHandler
 	private void canPlace(BlockPlaceEvent e) {
 		Player player = e.getPlayer();
-		for (Team team : Main.getInstance().getTeams()) {
+		for (Team team : GameMain.getInstance().getTeams()) {
 			if(team.containsPlayer(player)) {
 				if(!team.getCanPlace()) {
 					e.setCancelled(true);

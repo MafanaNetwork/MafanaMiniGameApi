@@ -1,6 +1,6 @@
 package me.TahaCheji.managers;
 
-import me.TahaCheji.Main;
+import me.TahaCheji.GameMain;
 import me.TahaCheji.gameData.Game;
 import me.TahaCheji.gameData.GamePlayer;
 import org.bukkit.Bukkit;
@@ -36,8 +36,8 @@ public class DeathManager {
             game.setWinner(winner);
             setSpectator();
         } else {
-            Main.getInstance().getPlayer(killer.getPlayer()).setKills(gamePlayer.getKills() + 1);
-            Bukkit.broadcastMessage(ChatColor.RED + Main.getInstance().getPlayer(killer.getPlayer()).getPlayer().getDisplayName() +
+            GameMain.getInstance().getPlayer(killer.getPlayer()).setKills(gamePlayer.getKills() + 1);
+            Bukkit.broadcastMessage(ChatColor.RED + GameMain.getInstance().getPlayer(killer.getPlayer()).getPlayer().getDisplayName() +
                     ChatColor.RED + " has killed " + target.getPlayer().getName() + ChatColor.RED + " due to blood loss.");
             setSpectator();
         }

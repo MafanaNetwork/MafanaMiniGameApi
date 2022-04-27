@@ -1,6 +1,6 @@
 package me.TahaCheji.events;
 
-import me.TahaCheji.Main;
+import me.TahaCheji.GameMain;
 import me.TahaCheji.gameData.Game;
 import me.TahaCheji.gameData.GamePlayer;
 import org.bukkit.entity.Player;
@@ -36,7 +36,7 @@ public class BlockInteract implements Listener {
     }
 
     private void handle(Cancellable event, Player player) {
-        Game game = Main.getInstance().getGame(player);
+        Game game = GameMain.getInstance().getGame(player);
         if (game != null) {
             if (game.isState(Game.GameState.LOBBY) || game.isState(Game.GameState.PREPARATION) || game.isState(Game.GameState.ENDING) || game.isState(Game.GameState.STARTING)) {
                 event.setCancelled(true); // Cancel, game isn't active
