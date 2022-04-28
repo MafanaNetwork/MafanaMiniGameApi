@@ -39,13 +39,6 @@
                             <goal>shade</goal>
                         </goals>
                         <configuration>
-                            <relocations>
-                                <relocation>
-                                    <pattern>fr.mrmicky.fastboard</pattern>
-                                    <!-- Replace 'com.yourpackage' with the package of your plugin ! -->
-                                    <shadedPattern>me.TahaCheji.fastboard</shadedPattern>
-                                </relocation>
-                            </relocations>
                             <createDependencyReducedPom>false</createDependencyReducedPom>
                             <outputFile>C:\Users\tahac\Desktop\MiniGame Server\plugins\MafanaGameApi.jar</outputFile>
                         </configuration>

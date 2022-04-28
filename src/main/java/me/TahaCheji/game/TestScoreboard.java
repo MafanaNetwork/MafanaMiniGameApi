@@ -8,6 +8,7 @@ import org.bukkit.ChatColor;
 
 public class TestScoreboard extends GameScoreboard {
     Game game;
+
     public TestScoreboard(Game game) {
         super("Mafana");
         this.game = game;

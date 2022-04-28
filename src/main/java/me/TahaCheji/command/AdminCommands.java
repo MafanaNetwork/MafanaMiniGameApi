@@ -34,7 +34,7 @@ public class AdminCommands implements CommandExecutor {
                 player.sendMessage(ChatColor.RED + "You Do Not Have The Permission To Do This Command");
             }
             if (args[0].equalsIgnoreCase("edit")) {
-                File gameMapsFolder = new File("plugins/SkyWiz/", "maps");
+                File gameMapsFolder = new File("plugins/MafanaGameAPI/", "maps");
                 GameMap gameMap = new LocalGameMap(gameMapsFolder, args[1], false);
                 if(args.length == 3 && args[2].equalsIgnoreCase("save")) {
                     GameMap newGameMap = GameMain.getInstance().getPlayerGameHashMap().get(player);

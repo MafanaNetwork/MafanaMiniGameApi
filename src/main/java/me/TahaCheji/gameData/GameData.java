@@ -17,7 +17,7 @@ import java.util.List;
 public class GameData {
 
     public static void saveGame(Game game) throws IOException {
-        File gameData = new File("plugins/SkyWiz/", "games/" + game.getName() + ".yml");
+        File gameData = new File("plugins/MafanaGameAPI/", "games/" + game.getName() + ".yml");
         FileConfiguration pD = YamlConfiguration.loadConfiguration(gameData);
         if (!gameData.exists()) {
             gameData.createNewFile();
@@ -42,14 +42,14 @@ public class GameData {
 
     public static List<Game> getAllSavedGames() {
         List<Game> arrayList = new ArrayList<>();
-        File dataFolder = new File("plugins/SkyWiz/", "games");
+        File dataFolder = new File("plugins/MafanaGameAPI/", "games");
         File[] files = dataFolder.listFiles();
         for (File file : files) {
             FileConfiguration pD = YamlConfiguration.loadConfiguration(file);
             String gameName = pD.getString("data.gameName");
             ItemStack material = pD.getItemStack("data.gameIcon");
             //gameMode
-            File gameMapsFolder = new File("plugins/SkyWiz/", "maps");
+            File gameMapsFolder = new File("plugins/MafanaGameAPI/", "maps");
 
 
             Location lobbySpawn = new Location(Bukkit.getWorld("world"), pD.getInt("lobby.x"), pD.getInt("lobby.y"), pD.getInt("lobby.z"));
