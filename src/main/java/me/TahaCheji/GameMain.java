@@ -2,7 +2,6 @@ package me.TahaCheji;
 
 import me.TahaCheji.command.AdminCommands;
 import me.TahaCheji.command.MainCommand;
-import me.TahaCheji.game.Duels;
 import me.TahaCheji.gameData.Game;
 import me.TahaCheji.gameData.GameData;
 import me.TahaCheji.gameData.GamePlayer;
@@ -62,7 +61,6 @@ public final class GameMain extends JavaPlugin {
         }
         getCommand("game").setExecutor(new MainCommand());
         getCommand("gameAdmin").setExecutor(new AdminCommands());
-        addGame(new Duels());
     }
 
     @Override
