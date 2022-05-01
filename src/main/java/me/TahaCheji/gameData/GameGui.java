@@ -12,6 +12,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -76,6 +77,7 @@ public class GameGui implements Listener {
             itemLore.add(ChatColor.DARK_PURPLE + "Game Time: " + game.getGameTime());
             itemLore.add("");
             itemLore.add(ChatColor.GOLD + "Click To Join The Game");
+            itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_DYE, ItemFlag.HIDE_DESTROYS, ItemFlag.HIDE_UNBREAKABLE);
             itemMeta.setLore(itemLore);
             itemStack.setItemMeta(itemMeta);
             gui.addItem(new GuiItem(itemStack));

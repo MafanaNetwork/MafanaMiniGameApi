@@ -33,8 +33,10 @@ public class GameRunTask extends BukkitRunnable {
         if (startIn <= 1) {
             this.cancel();
             game.start();
-            gameTask = new ActiveGameTask(game, game.getGameTime());
-            gameTask.runTaskTimer(GameMain.getInstance(), 0, 20);
+            if(game.isHasGameTime()) {
+                gameTask = new ActiveGameTask(game, game.getGameTime());
+                gameTask.runTaskTimer(GameMain.getInstance(), 0, 20);
+            }
         } else {
             startIn -= 1;
             this.game.sendMessage(ChatColor.GOLD + "[Game Manager] " + "The game will begin in " + startIn + " second" + (startIn == 1 ? "" : "s"));

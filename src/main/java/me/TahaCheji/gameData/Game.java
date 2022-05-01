@@ -30,6 +30,7 @@ public class Game implements GameManager {
 
     private GameState gameState = GameState.LOBBY;
     private boolean movementFrozen = false;
+    private boolean hasGameTime = true;
     private int maxGameTime = 0;
     private int gameTime = maxGameTime;
 
@@ -91,7 +92,6 @@ public class Game implements GameManager {
         if (activePlayers.size() == 2) {
             sendMessage(ChatColor.GOLD + "[Game Manager] " + "The game will begin in 20 seconds...");
             GameMain.getInstance().addActiveGame(this);
-            start();
             startCountDown();
         }
     }
@@ -108,14 +108,12 @@ public class Game implements GameManager {
         setState(GameState.ACTIVE);
         sendMessage(ChatColor.GOLD + "[Game Manager] " + "The game has started.");
         setMovementFrozen(false);
-
     }
 
     public void adminStart() {
         setState(GameState.STARTING);
         sendMessage(ChatColor.GOLD + "[Game Manager] " + "The game will begin in 20 seconds...");
         GameMain.getInstance().getActiveGames().add(this);
-        start();
         startCountDown();
     }
 
@@ -240,6 +238,18 @@ public class Game implements GameManager {
         return maxGameTime;
     }
 
+    public void setHasGameTime(boolean hasGameTime) {
+        this.hasGameTime = hasGameTime;
+    }
+
+    public boolean isHasGameTime() {
+        return hasGameTime;
+    }
+
+    public GameCountdownTask getGameCountdownTask() {
+        return gameCountdownTask;
+    }
+
     public void setPlayerSpawnLocations(List<Location> playerSpawnLocations) {
         this.playerSpawnLocations = playerSpawnLocations;
     }
@@ -269,6 +279,8 @@ public class Game implements GameManager {
     public void setMovementFrozen(boolean movementFrozen) {
         this.movementFrozen = movementFrozen;
     }
+
+
 
 
     public String getName() {
